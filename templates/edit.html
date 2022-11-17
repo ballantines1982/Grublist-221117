@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="editContent">
+        <p>Edit {{ meal.name }}</p>
+        <form action="" method="post">
+            <input type="text" name="meal" class="textInput" value="{{ meal.name }}" placeholder="Namn på måltid" autofocus required>
+            <input type="number" name="no_of_meals" class="numberInput" value="{{ meal.quant }}" placeholder="Antal måltider" width="5" required>
+            <input type="date" name="last_ate" class="dateInput" value="{{ meal.last_ate }}" placeholder="Åt senast" width="5"><br>
+            
+            <input type="radio" name="meal_type" class="radio" id="storkok" value="Storkok" checked>
+            <label for="storkok" class="radio" >Storkok</label>
+            <input type="radio" name="meal_type" class="radio" id="middag" value="Middag">
+            <label for="middag" class="radio">Middag</label>
+            <input type="radio" name="meal_type" class="radio" id="lunch" value="Lunch">
+            <label for="lunch" class="radio" >Lunch</label><br>
+        
+            <input type="submit" value="Ångra" name="btn" class="editBtn">
+            <input type="submit" value="Ändra" name="btn" class="editBtn">
+    </div>
+    </form>
+{% endblock %}

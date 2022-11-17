@@ -1,0 +1,144 @@
+html {
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#scroll {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    margin: 0;
+    padding-top: 10px;
+}
+
+
+input {
+    border-radius: 5px;
+    border: 1px solid #707070;
+    font-size: 20px;
+    color: #505050;
+}
+
+input[type="radio"] {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+    
+}
+
+.textInput, .numberInput, .dateInput, .editBtn, #addBtn {
+    height: 36px;
+    margin: 8px;
+}
+
+input[type="text"] {
+    width: 280px;
+}
+
+.numberInput {
+    width: 50px;
+}
+
+.dateInput {
+    width: 205px;
+}
+
+input[type="radio"] {
+    margin: 20px 12px;
+    
+}
+
+.editBtn, #addBtn {
+    border: None;
+    text-decoration: None;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    
+
+}
+
+.editBtn {
+    width: 42%;
+    color: #505050
+}
+
+.editBtn:nth-child(2n-1), #addBtn {
+    background-color: #4ADA50;
+    color: #FFF;
+}
+
+#addBtn {
+    width: 45%;
+
+
+}
+
+.addContent {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid #808080
+}
+
+.addContentShow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid #808080
+}
+
+#btnAddRound {
+    position: fixed;
+    text-align: center;
+    width: 56px;
+    height: 56px;
+    right: 5%;
+    bottom: 5%;
+    border-radius: 29px;
+    background: #4ADA50;
+    font-size: 49px;
+    color: #FFF;
+
+}
+
+.div1, .div2, .div3 {
+    font-size: 13px;
+    /* border: 1px solid green; */
+    padding: 0px 0px 0px 10px;
+}
+
+.div1 {
+    font-weight: 700;
+    font-size: 16px;
+    padding: 7px 0px 0px 10px;
+}
+.div2 {
+    font-weight: 700;
+    padding: 7px 0px 0px 0px;
+    color: #000AFF;
+}
+.div4 {
+    display: flex;
+    padding: 0px;
+    justify-content: space-between;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 230px 90px;
+    grid-template-rows: 26px 21px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    /* border: 1px solid green; */
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 20px lightgrey;
+    
+    
+}
+
+.div1 { grid-area: 1 / 1 / 2 / 2; }
+.div2 { grid-area: 1 / 2 / 2 / 3; }
+.div3 { grid-area: 2 / 1 / 3 / 2; }
+.div4 { grid-area: 2 / 2 / 3 / 3; }

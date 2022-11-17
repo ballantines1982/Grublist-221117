@@ -1,0 +1,104 @@
+from flask import Flask, request, render_template, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+
+app = Flask(__name__, static_url_path='/static')
+app.config['SECRET_KEY'] = "AliceEllenHugo"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+today = datetime.today().date()
+week = today.isocalendar()[1]
+
+
+class Meal(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    quant = db.Column(db.Integer, nullable=False)
+    meal_type = db.Column(db.String(100), nullable=False)
+    protein = db.Column(db.String(100))
+    last_ate = db.Column(db.String(100))
+    created = db.Column(db.String(100))
+    child_ok = db.Column(db.Boolean)
+
+    
+    def __repr__(self):
+        return f'{self.id} {self.name} {self.quant} {self.meal_type} {self.protein} {self.last_ate} {self.created} {self.child_ok}'
+
+
+@app.route('/', methods = ['POST', 'GET'])
+def index():
+    today = datetime.today().date()
+    meals = Meal.query.all()
+    if request.method == 'POST':
+        if request.form['btn'] == 'Add':
+            name = request.form['meal']
+            quant = request.form['no_of_meals']
+            meal_type = request.form['meal_type']
+            
+            meal = Meal(name=name, quant=quant, meal_type=meal_type, last_ate=today, created=today, protein="")
+
+            db.session.add(meal)
+            db.session.commit()
+    
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    return render_template('index.html', meals=meals)
+            
+@app.route('/<int:meal_id>/edit/', methods=['POST', 'GET'])
+def edit(meal_id):
+    meal = Meal.query.get_or_404(meal_id)
+    
+    if request.method == 'POST':
+        if request.form['btn'] == 'Ändra':
+            name = request.form['meal']
+            quant = request.form['no_of_meals']
+            meal_type = request.form['meal_type']
+            last_ate = request.form['last_ate']
+            
+            meal.name = name
+            meal.quant = quant
+            meal.meal_type = meal_type
+            meal.last_ate = last_ate
+            
+            db.session.add(meal)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    return render_template('edit.html', meal=meal)
+
+@app.route('/<int:meal_id>/delete/', methods=['POST', 'GET'])
+def delete(meal_id):
+    if request.method == 'GET':
+        meal = Meal.query.get_or_404(meal_id)
+        db.session.delete(meal)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('index.html')
+
+
+@app.route('/<int:meal_id>/select/', methods = ['POST', 'GET'])
+def select(meal_id):
+    if request.method == 'GET':
+        meal = Meal.query.get_or_404(meal_id)
+        meal.last_ate = today
+        
+        db.session.add(meal)
+        db.session.commit()
+        
+        return redirect(url_for('index'))
+    return render_template('index.html')
+
+if __name__ == "__main__":
+    #db.init_app(app)
+    app.run(debug=True)
+
+# Addera en html fil för att selected_meals som visar vilka måltider som valts.
+# 

@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block selection %}
+<p>Valda måltider</p>
+    <table border = 0>
+        <th>Måltid</th>
+        {% for meal in selected %}
+            <tr>
+                <td>{{ meal.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+    

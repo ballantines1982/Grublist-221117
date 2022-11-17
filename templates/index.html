@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div id="btnAddRound">+</div>
+<div class="addContent" id="addContentID">
+    <form action="" method="post" id="Add">
+        <input type="text" id ="textInput" name="meal" class="textInput" minlength="1" placeholder="Namn på måltid" autofocus>
+        <input type="number" name="no_of_meals" class="numberInput" placeholder="Antal måltider" width="5"><br>
+        
+        <input type="radio" name="meal_type" id="storkok" value="Storkok" checked>
+        <label for="storkok">Storkok</label>
+        <input type="radio" name="meal_type" id="middag" value="Middag">
+        <label for="middag">Middag</label>
+        <input type="radio" name="meal_type" id="lunch" value="Lunch">
+        <label for="lunch">Lunch</label><br>
+        
+        <input type="submit" value="Ångra" name="btn" class="editBtn">
+        <input type="submit" id="addBtn" value="Add" name="btn">
+    </form>
+</div>
+
+<div id="scroll">
+    {% for meal in meals %}
+    <div class="parent">
+        <div class="div1">{{ meal.name }} </div>
+        <div class="div2">{{ meal.last_ate }} </div>
+        <div class="div3">{{ meal.meal_type }} </div>
+        <div class="div4">
+            <a href="{{ url_for('edit', meal_id=meal.id) }}" name="btn" value="Edit">
+                <img src="{{ url_for('static', filename='gear.png') }}" width="15" height="15" alt="Edit" align="center"></a>
+                <a href="{{ url_for('delete', meal_id=meal.id) }}" name="btn" value="Delete">
+                    <img src="{{ url_for('static', filename='trash.png') }}" width="15" height="15" alt="Delete" align="center"></a>
+                    <a href="{{ url_for('select', meal_id=meal.id) }}" name="btn" calue="Select">
+                        <img src="{{ url_for('static', filename='check-mark.png') }}" width="15" height="15" alt="Select" align="center"></a>
+            </div>
+        </div>
+        {% endfor %}                  
+    </div>
+    
+    
+        
+{% endblock %}
+
+{% block head_js %}
+    {{ super() }}
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+{% endblock %}
