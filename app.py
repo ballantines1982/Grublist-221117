@@ -1,21 +1,24 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, current_app
 from flask_sqlalchemy import SQLAlchemy
-
 from datetime import datetime
+from flask_migrate import Migrate
 
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = "AliceEllenHugo"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ymaqlnniohhywp:05eea2eefa5f47549021243b8af0704dc4babd1eebb3128d79241646c618a16f@ec2-54-86-214-124.compute-1.amazonaws.com:5432/d5a7qds2o2ij75'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ymaqlnniohhywp:05eea2eefa5f47549021243b8af0704dc4babd1eebb3128d79241646c618a16f@ec2-54-86-214-124.compute-1.amazonaws.com:5432/d5a7qds2o2ij75'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+    
 today = datetime.today().date()
 week = today.isocalendar()[1]
 
-
+migrate = Migrate(app, db)
 class Meal(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
@@ -98,8 +101,6 @@ def select(meal_id):
     return render_template('index.html')
 
 if __name__ == "__main__":
-    #db.init_app(app)
+    db.init_app(app)
     app.run(debug=True)
 
-# Addera en html fil för att selected_meals som visar vilka måltider som valts.
-# 
