@@ -1,0 +1,51 @@
+<div class="sticky-top">
+  <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Grublist</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                Lägg till
+              </button>
+              <form class="dropdown-menu p-4" action="" method="POST" id="Addera">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default" autofocus>Maträtt</span>
+                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="meal">
+                </div>
+
+
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupSelect01">Protein</label>
+                  <select class="form-select" id="inputGroupSelect01" name="protein">
+                    <option selected>Välj</option>
+                    <option value="Fisk">Fisk</option>
+                    <option value="Kyckling">Kyckling</option>
+                    <option value="Kött">Kött</option>
+                    <option value="Vegetariskt">Vegetariskt</option>
+                  </select>
+                </div>
+
+
+                <label for="customRange2" class="form-label">Antal måltider</label>
+                <input type="range" class="form-range" min="0" max="10" id="customRange2" oninput="this.nextElementSibling.value = this.value">
+                <input name="no_of_meals"></input>
+
+                
+                <button type="submit" class="btn btn-primary" name="btn" value="Addera">Addera</button>
+                
+              </form>
+            </div>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Sök..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Sök</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+</div>

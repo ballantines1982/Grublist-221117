@@ -40,12 +40,14 @@ def index():
     today = datetime.today().date()
     meals = Meal.query.all()
     if request.method == 'POST':
-        if request.form['btn'] == 'Add':
+        if request.form['btn'] == 'Addera':
+            print('klick')
             name = request.form['meal']
             quant = request.form['no_of_meals']
-            meal_type = request.form['meal_type']
+            #meal_type = request.form['meal_type']
+            protein = request.form['protein']
             
-            meal = Meal(name=name, quant=quant, meal_type=meal_type, last_ate=today, created=today, protein="")
+            meal = Meal(name=name, quant=quant, meal_type="", last_ate=today, created=today, protein=protein)
 
             db.session.add(meal)
             db.session.commit()
