@@ -3,8 +3,8 @@
 {% block content %}
     <div class="editContent">
         <p>Edit {{ meal.name }}</p>
-        <form action="" method="post">
-            <input type="text" name="meal" class="textInput" value="{{ meal.name }}" placeholder="Namn på måltid" autofocus required>
+        <form action="" method="POST">
+            <!-- <input type="text" name="meal" class="textInput" value="{{ meal.name }}" placeholder="Namn på måltid" autofocus required>
             <input type="number" name="no_of_meals" class="numberInput" value="{{ meal.quant }}" placeholder="Antal måltider" width="5" required>
             <input type="date" name="last_ate" class="dateInput" value="{{ meal.last_ate }}" placeholder="Åt senast" width="5"><br>
             
@@ -13,11 +13,37 @@
             <input type="radio" name="meal_type" class="radio" id="middag" value="Middag">
             <label for="middag" class="radio">Middag</label>
             <input type="radio" name="meal_type" class="radio" id="lunch" value="Lunch">
-            <label for="lunch" class="radio" >Lunch</label><br>
-        
-            <input type="submit" value="Ångra" name="btn" class="editBtn">
+            <label for="lunch" class="radio" >Lunch</label><br> -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default" autofocus>Maträtt</span>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="meal" value="{{ meal.name }}">
+              </div>
+
+
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Protein</label>
+                <select class="form-select" id="inputGroupSelect01" name="protein">
+                  <option selected>{{ meal.protein }}</option>
+                  <option value="Fisk">Fisk</option>
+                  <option value="Kyckling">Kyckling</option>
+                  <option value="Kött">Kött</option>
+                  <option value="Vegetariskt">Vegetariskt</option>
+                </select>
+              </div>
+
+              <input type="date" name="last_ate" class="dateInput" value="{{ meal.last_ate }}" placeholder="Åt senast" width="5">
+              <label for="customRange2" class="form-label">Antal måltider</label>
+              <input type="range" class="form-range" min="0" max="10" id="customRange2" oninput="this.nextElementSibling.value = this.value">
+              <input name="no_of_meals"></input>
+            <!-- </form> -->
+            
+            <input type="submit" value="Spara" name="btn" class="editBtn">
+
+            <form action="{{ url_for('delete', meal_id=meal.id) }}" method="GET">
             <input type="submit" value="Ta Bort" name="btn" class="editBtn">
-            <input type="submit" value="Ändra" name="btn" class="editBtn">
+            </form>
+
+            <!-- <form action="{{ url_for('edit', meal_id=meal.id) }}" method="POST"> -->
+            
     </div>
-    </form>
 {% endblock %}

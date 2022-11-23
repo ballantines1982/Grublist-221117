@@ -41,18 +41,24 @@ def index():
     meals = Meal.query.all()
     if request.method == 'POST':
         if request.form['btn'] == 'Addera':
-            print('klick')
             name = request.form['meal']
             quant = request.form['no_of_meals']
             #meal_type = request.form['meal_type']
             protein = request.form['protein']
             
-            meal = Meal(name=name, quant=quant, meal_type="", last_ate=today, created=today, protein=protein)
+            meal = Meal(name=name, quant=quant, meal_type="", last_ate="", created=today, protein=protein)
 
             db.session.add(meal)
             db.session.commit()
     
             return redirect(url_for('index'))
+        # elif request.form['btn'] == 'Middag':
+        #     meal = Meal.query.get_or_404(meal_id)
+        #     meal.last_ate = today
+            
+        #     db.session.add(meal)
+        #     db.session.commit()
+        #     return redirect(url_for('index'))
         else:
             return redirect(url_for('index'))
     return render_template('index.html', meals=meals)
@@ -62,21 +68,25 @@ def edit(meal_id):
     meal = Meal.query.get_or_404(meal_id)
     
     if request.method == 'POST':
-        if request.form['btn'] == 'Ändra':
+        if request.form['btn'] == 'Spara':
             name = request.form['meal']
             quant = request.form['no_of_meals']
-            meal_type = request.form['meal_type']
+            protein = request.form['protein']
             last_ate = request.form['last_ate']
             
             meal.name = name
             meal.quant = quant
-            meal.meal_type = meal_type
+            meal.protein = protein
             meal.last_ate = last_ate
             
             db.session.add(meal)
             db.session.commit()
             return redirect(url_for('index'))
+
         else:
+            meal = Meal.query.get_or_404(meal_id)
+            db.session.delete(meal)
+            db.session.commit()
             return redirect(url_for('index'))
     return render_template('edit.html', meal=meal)
 
@@ -92,14 +102,17 @@ def delete(meal_id):
 
 @app.route('/<int:meal_id>/select/', methods = ['POST', 'GET'])
 def select(meal_id):
-    if request.method == 'GET':
-        meal = Meal.query.get_or_404(meal_id)
-        meal.last_ate = today
-        
-        db.session.add(meal)
-        db.session.commit()
-        
-        return redirect(url_for('index'))
+    if request.method == 'POST':
+        if request.form['btn'] == 'Middag':
+            meal = Meal.query.get_or_404(meal_id)
+            meal.last_ate = today
+            
+            db.session.add(meal)
+            db.session.commit()
+            
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
     return render_template('index.html')
 
 if __name__ == "__main__":
