@@ -7,8 +7,8 @@ from flask_migrate import Migrate
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = "AliceEllenHugo"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ymaqlnniohhywp:05eea2eefa5f47549021243b8af0704dc4babd1eebb3128d79241646c618a16f@ec2-54-86-214-124.compute-1.amazonaws.com:5432/d5a7qds2o2ij75'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ymaqlnniohhywp:05eea2eefa5f47549021243b8af0704dc4babd1eebb3128d79241646c618a16f@ec2-54-86-214-124.compute-1.amazonaws.com:5432/d5a7qds2o2ij75'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
