@@ -35,7 +35,7 @@ class Meal(db.Model):
 
     
     def __repr__(self):
-        return f'{self.id} {self.name} {self.quant} {self.protein} {self.last_ate} {self.created} {self.child_ok}'
+        return f'{self.id} {self.name} {self.quant} {self.protein} {self.last_ate} {self.created} {self.child_ok} {self.dinner_count}'
 
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -109,7 +109,7 @@ def select(meal_id):
         if request.form['btn'] == 'Middag':
             meal = Meal.query.get_or_404(meal_id)
             meal.last_ate = today
-            meal.dinner_count = meal.dinner_count + 1
+            meal.dinner_count = meal.dinner_count +1
             
             db.session.add(meal)
             db.session.commit()
