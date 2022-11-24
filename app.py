@@ -29,10 +29,13 @@ class Meal(db.Model):
     last_ate = db.Column(db.String(100))
     created = db.Column(db.String(100))
     child_ok = db.Column(db.Boolean)
+    dinner_count = db.Column(db.Integer)
+    lunch_count = db.Column(db.Integer)
+    
 
     
     def __repr__(self):
-        return f'{self.id} {self.name} {self.quant} {self.meal_type} {self.protein} {self.last_ate} {self.created} {self.child_ok}'
+        return f'{self.id} {self.name} {self.quant} {self.protein} {self.last_ate} {self.created} {self.child_ok}'
 
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -46,7 +49,7 @@ def index():
             #meal_type = request.form['meal_type']
             protein = request.form['protein']
             
-            meal = Meal(name=name, quant=quant, meal_type="", last_ate="", created=today, protein=protein)
+            meal = Meal(name=name, quant=quant, meal_type="", last_ate="", created=today, protein=protein, dinner_count=0)
 
             db.session.add(meal)
             db.session.commit()
@@ -106,6 +109,7 @@ def select(meal_id):
         if request.form['btn'] == 'Middag':
             meal = Meal.query.get_or_404(meal_id)
             meal.last_ate = today
+            meal.dinner_count = meal.dinner_count + 1
             
             db.session.add(meal)
             db.session.commit()

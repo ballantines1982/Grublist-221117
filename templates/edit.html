@@ -32,15 +32,15 @@
               </div>
 
               <input type="date" name="last_ate" class="dateInput" value="{{ meal.last_ate }}" placeholder="Åt senast" width="5">
-              <label for="customRange2" class="form-label">Antal måltider</label>
+              <!-- <label for="customRange2" class="form-label">Antal måltider</label>
               <input type="range" class="form-range" min="0" max="10" id="customRange2" oninput="this.nextElementSibling.value = this.value">
-              <input name="no_of_meals"></input>
+              <input name="no_of_meals"></input> -->
             <!-- </form> -->
             
-            <input type="submit" value="Spara" name="btn" class="editBtn">
+            <input type="submit" value="Spara" name="btn" class="btn btn-primary">
 
             <form action="{{ url_for('delete', meal_id=meal.id) }}" method="GET">
-            <input type="submit" value="Ta Bort" name="btn" class="editBtn">
+            <input type="submit" value="Ta Bort" name="btn" class="btn btn-primary">
             </form>
 
             <!-- <form action="{{ url_for('edit', meal_id=meal.id) }}" method="POST"> -->
