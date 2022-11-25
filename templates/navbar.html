@@ -34,10 +34,9 @@
                 <!-- <label for="customRange2" class="form-label">Antal måltider</label>
                 <input type="range" class="form-range" min="0" max="10" id="customRange2" oninput="this.nextElementSibling.value = this.value">
                 <input name="no_of_meals"></input> -->
-
-                
+              
+              <form action="{{ url_for('index') }}" method="POST">
                 <button type="submit" class="btn btn-primary" name="btn" value="Addera">Addera</button>
-                
               </form>
             </div>
           </ul>

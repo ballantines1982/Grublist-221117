@@ -23,8 +23,8 @@ class Meal(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    quant = db.Column(db.Integer, nullable=False)
-    meal_type = db.Column(db.String(100), nullable=False)
+    quant = db.Column(db.Integer)
+    meal_type = db.Column(db.String(100))
     protein = db.Column(db.String(100))
     last_ate = db.Column(db.String(100))
     created = db.Column(db.String(100))
@@ -45,11 +45,11 @@ def index():
     if request.method == 'POST':
         if request.form['btn'] == 'Addera':
             name = request.form['meal']
-            quant = request.form['no_of_meals']
+            #quant = request.form['no_of_meals']
             #meal_type = request.form['meal_type']
             protein = request.form['protein']
             
-            meal = Meal(name=name, quant=quant, meal_type="", last_ate="1970-01-01", created=today, protein=protein, dinner_count=0)
+            meal = Meal(name=name, meal_type="", last_ate="1970-01-01", created=today, protein=protein, dinner_count=0)
 
             db.session.add(meal)
             db.session.commit()
