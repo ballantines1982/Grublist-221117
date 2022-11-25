@@ -52,14 +52,18 @@
           </div>
 
             <div class="d-flex">
-                <div class="p-2 flex-fill">Protein: {{ meal.protein }} Dinner Count: {{ meal.dinner_count }}</div>
-        </form>
-        
-        <div class="ms-auto p-2">
-            <form action="{{ url_for('select', meal_id=meal.id) }}" method="POST">
-                <button class="btn btn-primary" type="submit" name="btn" value="select">Lunch</button></div>
-                <button class="btn btn-primary" type="submit" name="btn" value="Middag">Middag</button>
+                <div class="p-1 flex-fill">Protein: {{ meal.protein }}</div>
             </form>
+            
+            <form action="{{ url_for('select', meal_id=meal.id) }}" method="POST">
+                <div class="ms-auto p-3">
+                    <button class="btn btn-primary btn-sm" type="submit" name="btn" value="select">Lunch</button>
+                    <button class="btn btn-primary btn-sm" type="submit" name="btn" value="Middag">Middag</button>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex">
+            <div class="p-1 flex-fill">Dinner Count: {{ meal.dinner_count }}</div>
         </div>
         <hr>
 

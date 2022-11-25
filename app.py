@@ -49,7 +49,7 @@ def index():
             #meal_type = request.form['meal_type']
             protein = request.form['protein']
             
-            meal = Meal(name=name, quant=quant, meal_type="", last_ate="", created=today, protein=protein, dinner_count=0)
+            meal = Meal(name=name, quant=quant, meal_type="", last_ate="1970-01-01", created=today, protein=protein, dinner_count=0)
 
             db.session.add(meal)
             db.session.commit()
@@ -109,7 +109,7 @@ def select(meal_id):
         if request.form['btn'] == 'Middag':
             meal = Meal.query.get_or_404(meal_id)
             meal.last_ate = today
-            meal.dinner_count = meal.dinner_count +1
+            meal.dinner_count = meal.dinner_count + 1
             
             db.session.add(meal)
             db.session.commit()
