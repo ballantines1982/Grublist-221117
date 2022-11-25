@@ -73,12 +73,12 @@ def edit(meal_id):
     if request.method == 'POST':
         if request.form['btn'] == 'Spara':
             name = request.form['meal']
-            quant = request.form['no_of_meals']
+            #quant = request.form['no_of_meals']
             protein = request.form['protein']
             last_ate = request.form['last_ate']
             
             meal.name = name
-            meal.quant = quant
+            #meal.quant = quant
             meal.protein = protein
             meal.last_ate = last_ate
             
